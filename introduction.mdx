@@ -1,67 +1,17 @@
 ---
-title: Introduction to Veyrax
+title: Introduction
 description: "Seamlessly integrate powerful tools into your AI agents"
 ---
 
-Veyrax is a powerful platform designed to revolutionize how AI agents interact with external tools and services. By providing a unified interface to over 20 different tools and services, Veyrax eliminates the complexity traditionally associated with integrating multiple APIs into your agent.
+Veyrax is a platform that provides streamlined access to tool integrations for AI agent systems, complete with UI components. We identified a fundamental problem: setting up tool integrations is extremely complex due to numerous endpoints, different serialization methods, and diverse data structures that require handling on both frontend and backend.
 
-At its core, Veyrax solves three critical challenges in agent development:
+Our core solution is simple yet powerful: a single endpoint that accepts any parameters, eliminating the need for developers to worry about Zod functions or data models. You simply specify three things:
+- `get_tool`: all tools that Agent has access to;
+- `tool-call`: executuion of the tool; 
+- `UI component`: display your data as UI without any effort. 
 
-1. **Integration Complexity**: Instead of building and maintaining separate integrations for each service, Veyrax offers a single, consistent interface.
+This approach delivers immediate results - UI components are automatically generated, and the system response is returned to the agent in a format it understands. The platform uses clear abstractions described in our core concepts.
 
-2. **Data Visualization**: Veyrax automatically generates beautiful UI components that render the data returned by tools, eliminating the need for custom frontend development.
+By abstracting away integration complexities, Veyrax lets developers focus on building intelligent agents that deliver real value to users.
 
-3. **Authentication Management**: The platform handles all the complexities of authentication, token refresh, and user permissions across different services.
-
-## Key Features
-
-### Extensive Tool Library
-
-Veyrax provides seamless access to over 20 popular tools and services, including:
-
-- **Communication Tools**: Gmail, Outlook, Slack
-- **Productivity Tools**: Google Calendar, Google Drive, Dropbox, Notion
-- **Project Management**: Jira, Linear, Confluence
-- **Information Services**: OpenWeather, Perplexity
-- **And many more...**
-
-Each tool comes with a comprehensive set of methods that allow agents to perform a wide range of actions, from sending emails to creating calendar events, searching documents, and beyond.
-
-### Automatic UI Components
-
-What truly sets Veyrax apart is its ability to automatically generate UI components for the data returned by tools. When an agent calls a tool, the response includes not just the raw data but also ready-to-render UI components that beautifully display that data.
-
-These components are:
-- **Responsive**: They adapt to different screen sizes
-- **Interactive**: Users can interact with the data directly
-- **Consistent**: They follow a unified design language
-- **Customizable**: They can be styled to match your application
-
-### Unified Authentication
-
-Veyrax handles all aspects of authentication across different services:
-- **OAuth Flow Management**: For services requiring OAuth
-- **API Key Management**: For services using API keys
-- **Token Refresh**: Automatic handling of token expiration
-- **User Permissions**: Ensuring users only access services they're authorized for
-
-### Developer-Friendly
-
-The platform is designed with developers in mind:
-- **Self-Documenting**: Tools provide their own schema and examples
-- **Consistent Interface**: All tools follow the same pattern
-- **Error Handling**: Standardized error responses across all tools
-- **Extensible**: Easy to add new tools and methods
-
-## Why Veyrax?
-
-Veyrax transforms the way agents interact with external services:
-
-- **Speed of Development**: Integrate with 20+ services in minutes instead of weeks
-- **Reduced Maintenance**: No need to update integrations when APIs change
-- **Beautiful UI**: Automatic rendering of data in user-friendly components
-- **Future-Proof**: New tools and services are continuously added to the platform
-
-By abstracting away the complexities of multiple integrations, Veyrax allows developers to focus on what matters most: building intelligent agents that deliver value to users.
-
-Whether you're building a personal assistant, a productivity tool, or an enterprise solution, Veyrax provides the infrastructure you need to quickly and easily connect your agent to the services your users rely on.
+Check tools that we have available: [Tool Marketplace](https://www.veyrax.com/marketplace)

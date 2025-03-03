@@ -1,0 +1,150 @@
+---
+title: 'Connect tools with AI'
+description: 'Start integrating tools into your AI agent in minutes'
+---
+
+To get started with VeyraX — you will need an `API KEY`. You can find it on platform in your [account settings](https://www.veyrax.com/agent/new).
+
+## Step 0: Connect Tools
+
+Before using VeyraX tools, you need to connect the services you want to integrate. Visit the [VeyraX Integrations page](https://www.veyrax.com/integrations) where you can find and connect a wide variety of tools and services. Simply browse through the extensive catalog of available integrations, select the ones you need, and follow the authentication process to connect them to your VeyraX account.
+
+## Step 1: Fetch Available Tools
+
+First, retrieve the list of available tools from the VeyraX integration endpoint:
+
+```python
+import requests
+
+VEYRAX_API_KEY = '<VEYRAX_API_KEY>'
+headers = {'VEYRAX_API_KEY': VEYRAX_API_KEY}
+
+response = requests.get('https://veyraxapp.com/get-tools', headers=headers)
+available_tools = response.json()
+
+print("Status:", response.status_code)
+print("Available Tools:", available_tools)
+```
+
+---
+
+## Step 2: Define OpenAI Function
+
+Now, define a function to ask OpenAI to determine which tool, method, and parameters should be called based on the user's query:
+
+```python
+import os
+import json
+from openai import OpenAI
+
+OPENAI_API_KEY = '<OPENAI_API_KEY>'
+
+client = OpenAI(api_key=OPENAI_API_KEY)
+
+def openai_call(question):
+    system_prompt = (
+        f"Available tools: {available_tools}. "
+        "Please format your response as JSON with keys: 'tool', 'method', and 'parameters'."
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": question},
+        ],
+        response_format={"type": "json_object"}
+    )
+
+    return json.loads(response.choices[0].message.content)
+```
+
+---
+
+## Step 3: Call the Selected Tool
+
+Use the response from OpenAI to call the corresponding VeyraX tool:
+
+```python
+def call_tool(tool_name, method_name, parameters):
+    url = f"https://veyraxapp.com/tool-call/{tool_name}/{method_name}"
+    response = requests.post(url, json=parameters, headers=headers)
+    return response.json()
+```
+
+---
+
+## Example Usage
+
+Let's ask OpenAI for the latest 10 Gmail messages and execute the appropriate tool:
+
+```python
+user_question = 'Last 10 Gmail messages'
+gpt_response = openai_call(user_question)
+
+print("GPT Response:", gpt_response)
+```
+
+OpenAI might return something like:
+
+```json
+{
+  "tool": "gmail",
+  "method": "get_messages",
+  "parameters": {
+    "pageToken": null,
+    "filters": {
+      "max_results": 10,
+      "recipient": null,
+      "subject_keywords": null,
+      "body_keywords": null,
+      "after_date": null,
+      "before_date": null
+    }
+  }
+}
+```
+
+Then, use this response to call the tool:
+
+```python
+result = call_tool(
+    gpt_response['tool'], 
+    gpt_response['method'], 
+    gpt_response['parameters']
+)
+
+print("Tool Result:", result)
+```
+
+This will return data and a React-compatible component structure for effortless rendering in any React environment:
+
+```json
+{
+  "data": {
+    "messages": [ ... ],
+    "pageToken": "18165763548201473580"
+  },
+  "component": {
+    "name": "ToolWrapper",
+    "props": {
+      "toolName": "gmail",
+      "children": {
+        "name": "GmailMessageList",
+        "props": {
+          "data": {
+            "messages": [ ... ],
+            "pageToken": "..."
+          }
+        },
+        "jsx": "..."
+      }
+    },
+    "jsx": "..."
+  }
+}
+```
+
+---
+
+You're now set up to dynamically leverage VeyraX tools within your OpenAI workflows!

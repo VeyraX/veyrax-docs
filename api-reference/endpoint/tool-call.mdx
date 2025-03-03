@@ -1,0 +1,71 @@
+---
+title: 'Tool Call'
+api: 'POST /tool-call/{tool}/{method}'
+description: 'Executes a specific tool method with the provided parameters'
+---
+
+This endpoint executes a specific method of a tool with the provided parameters. The response format depends on the specific tool and method being called.
+
+## Path Parameters
+
+<ParamField path="tool" type="string" required>
+  The name of the tool to call (e.g., "gmail", "google-calendar", "slack")
+</ParamField>
+
+<ParamField path="method" type="string" required>
+  The method of the tool to call (e.g., "listEmails", "sendEmail", "listEvents")
+</ParamField>
+
+## Request Body
+
+The request body should contain the parameters required by the specific tool method being called. The structure varies depending on the tool and method.
+
+## Response
+
+The response format depends on the specific tool and method being called. Refer to the tool's documentation for details on the expected response format.
+
+## Error Codes
+
+<ResponseField name="404" type="object">
+  Returned when the specified tool or method is not found.
+  
+  <Expandable title="Properties">
+    <ResponseField name="detail" type="string">
+      Error message describing the issue.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="500" type="object">
+  Returned when there is a server error.
+  
+  <Expandable title="Properties">
+    <ResponseField name="detail" type="string">
+      Error message describing the issue.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash
+curl --request POST \
+  --url https://veyraxapp.com/tool-call/gmail/sendEmail \
+  --header 'VEYRAX_API_KEY: <your_api_key>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "to": "recipient@example.com",
+    "subject": "Hello from VeyraX",
+    "body": "This is a test email sent via the VeyraX API."
+  }'
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "messageId": "1234567890",
+  "threadId": "0987654321",
+  "status": "sent"
+}
+```
+</ResponseExample> 

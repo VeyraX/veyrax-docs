@@ -1,0 +1,58 @@
+---
+title: 'Get Tools'
+api: 'GET /get-tools'
+description: 'Returns all available tools for the authenticated user'
+---
+
+This endpoint retrieves all available tools and their schemas for the authenticated user. The response includes a map of tool names to their respective schemas.
+
+## Response
+
+<ResponseField name="tools" type="object">
+  Map of available tools and their schemas. Each key is a tool name, and the value is the tool's schema.
+</ResponseField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url https://veyraxapp.com/get-tools \
+  --header 'VEYRAX_API_KEY: <your_api_key>'
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "tools": {
+    "gmail": {
+      "methods": {
+        "listEmails": {
+          "parameters": {
+            "query": "string",
+            "maxResults": "number"
+          }
+        },
+        "sendEmail": {
+          "parameters": {
+            "to": "string",
+            "subject": "string",
+            "body": "string"
+          }
+        }
+      }
+    },
+    "google-calendar": {
+      "methods": {
+        "listEvents": {
+          "parameters": {
+            "timeMin": "string",
+            "timeMax": "string",
+            "maxResults": "number"
+          }
+        }
+      }
+    }
+  }
+}
+```
+</ResponseExample> 

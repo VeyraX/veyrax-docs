@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "VeyraX",
   "colors": {
     "primary": "#333333",
     "light": "#FFFFFF",
@@ -17,19 +17,17 @@
             "group": "Get Started",
             "pages": [
               "introduction",
-              "quickstart",
-              "development"
+              "core-concept",
+              "ui-components",
+              "quickstart"
             ]
           },
           {
-            "group": "Examples",
+            "group": "Cookbooks",
             "pages": [
-              "examples/markdown",
-              "examples/code",
-              "examples/images",
-              "examples/settings",
-              "examples/navigation",
-              "examples/reusable-snippets"
+              "call_tools_with_ai",
+              "python-quick-start",
+              "aisdk-quick-start"
             ]
           }
         ]
@@ -44,12 +42,10 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Endpoints",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/get-tools",
+              "api-reference/endpoint/tool-call"
             ]
           }
         ]
@@ -63,14 +59,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Integrations",
+        "href": "https://veyrax.com/marketplace"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Platform",
+      "href": "https://veyrax.com/agent/new"
     }
   },
   "footer": {

@@ -1,0 +1,86 @@
+---
+title: UI Components
+description: "VeyraX dynamically renders backend-generated components directly on the frontend, using a structured JSON-based approach."
+---
+
+Dynamic frontend rendering enables rapid, flexible, and safe frontend updates without requiring redeployments.
+
+![Dropbox Integration Example](/images/image.png)
+
+### How it Works:
+
+#### Backend Sends a JSON Contract
+
+Each tool or widget from the backend is described using a clear JSON contract:
+
+```json
+{
+  "name": "SummaryCard",
+  "jsx": "(props) => React.createElement('div', { className: 'p-4 bg-blue-100 rounded' }, props.safeSubstring(props.text, 0, 100))",
+  "props": {
+    "text": "Dynamic backend-generated content."
+  }
+}
+```
+- `name`: Identifier for logging or debugging.
+- `jsx`: A string representation of a JavaScript function returning a React element.
+- `props`: Backend-generated props passed directly to the component.
+
+#### Frontend Parses and Prepares for Rendering
+
+The frontend receives and parses this JSON structure using a dedicated renderer:
+
+```jsx
+<DynamicComponentRender component={componentData} />
+```
+
+<Info>
+  Check out DynamicComponentRender code in our <a href="https://github.com/VeyraX/quick-start-aisdk/blob/main/app/chat/dynamic-render.tsx" target="_blank">GitHub repository</a> for the complete source code.
+</Info>
+
+
+This renderer seamlessly supports both single components and arrays:
+
+```jsx
+const components = Array.isArray(component) ? component : [component];
+```
+
+#### Isolated Rendering via SingleComponent
+Each received component is rendered independently using the SingleComponent renderer, allowing robust error handling:
+
+
+```jsx
+components.map((comp, index) => (
+  <SingleComponent key={index} component={comp} />
+))
+```
+
+This ensures that if one component encounters an error, others remain unaffected.
+
+
+#### Secure Runtime JSX Execution
+The JSX string received from the backend is securely converted and executed as a real JavaScript function at runtime:
+
+```jsx
+const ComponentFunction = new Function('React', 'props', safeExecute);
+return ComponentFunction(React, component.props);
+```
+How does this work?
+- JSX strings are dynamically converted into executable JavaScript functions at runtime.
+- Protective helper functions like safeSubstring are injected to ensure robustness against unexpected data inputs.
+- Backend-generated props are immediately available within the component function as standard React props.
+
+
+Example of a runtime-executed component:
+
+```jsx
+const Comp = (props) => React.createElement(
+  'div',
+  { className: 'p-4 bg-blue-100 rounded' },
+  props.safeSubstring(props.text, 0, 100)
+);
+
+return Comp(enhancedProps);
+```
+
+This technique allows developers to rapidly introduce new tools or widgets without needing frontend redeployments or extensive additional type definitions, significantly accelerating the development and deployment process.

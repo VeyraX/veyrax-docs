@@ -1,65 +1,93 @@
 ---
 title: 'Quickstart'
-description: 'Start integrating tools into your AI agent in minutes'
+description: 'Start integrating VeyraX tools into your applications in minutes'
 ---
-## Step 1: Get Your API Key
 
-First, obtain your Veyrax API key from the dashboard.
+To get started with VeyraX — you will need an `API KEY`. You can find it on the platform in your [account settings](https://www.veyrax.com/agent/new).
 
-## Step 2: Discover Available Tools
+## Step 0: Connect Tools
 
-To see which tools are available to you:
+Before using VeyraX tools, you need to connect the services you want to integrate. Visit the [VeyraX Integrations page](https://www.veyrax.com/integrations) where you can find and connect a wide variety of tools and services. Simply browse through the extensive catalog of available integrations, select the ones you need, and follow the authentication process to connect them to your VeyraX account.
 
-```javascript
-// Get all available tools
-async function getAvailableTools() {
-  const response = await fetch('https://api.veyrax.com/get-tools', {
-    headers: {
-      'VEYRAX_API_KEY': 'your_api_key_here'
-    }
-  });
-  
-  const data = await response.json();
-  return data.tools;
-}
+## Step 1: Set Up Your Environment
 
-// Usage
-const tools = await getAvailableTools();
-console.log(tools);
-// Output: { "gmail": {...}, "slack": {...}, ... }
+First, make sure you have the necessary libraries installed:
+
+```bash
+pip install requests
 ```
 
-## Step 3: Call a Tool
+## Step 2: Configure Your API Key
 
-To call any tool method:
+```python
+import requests
 
-```javascript
-// Call a tool method
-async function callTool(tool, method, params = {}) {
-  const response = await fetch(`https://api.veyrax.com/tool-call/${tool}/${method}`, {
-    method: 'POST',
-    headers: {
-      'VEYRAX_API_KEY': 'your_api_key_here',
-      'Content-Type': 'application/json'
+# API configuration
+VEYRAX_API_KEY = '<YOUR_VEYRAX_API_KEY>'
+headers = {'VEYRAX_API_KEY': VEYRAX_API_KEY}
+```
+
+## Step 3: Call a VeyraX Tool
+
+Now you can call any connected tool through the VeyraX platform. Here's an example of starring a GitHub repository:
+
+```python
+# API configuration
+base_url = 'https://veyraxapp.com/tool-call'
+
+# Request details
+url = f"{base_url}/github/star_repository"
+payload = {"owner": "VeyraX", "repo": "quick-start-python"}
+
+# Make request and print results
+response = requests.post(url, json=payload, headers=headers)
+print(f"Status: {response.status_code}")
+print(f"Response: {response.json()}")
+```
+
+The response will include both the data and a React component that can be directly rendered in your frontend:
+
+```json
+{
+  "data": {
+    "success": true,
+    "message": "Repository starred successfully"
+  },
+  "component": {
+    "name": "ToolWrapper",
+    "props": {
+      "toolName": "github",
+      "children": {
+        "name": "GitHubActionResult",
+        "props": {
+          "data": {
+            "success": true,
+            "message": "Repository starred successfully"
+          }
+        },
+        "jsx": "..."
+      }
     },
-    body: JSON.stringify(params)
-  });
-  
-  return await response.json();
-}
-
-// Example: Get Gmail messages
-const gmailResult = await callTool('gmail', 'get_messages', {
-  filters: {
-    subject_keywords: 'important'
+    "jsx": "..."
   }
-});
-
-// Example: Send a Slack message
-const slackResult = await callTool('slack', 'send_message', {
-  channel: "general",
-  text: "Hello from Veyrax API!"
-});
+}
 ```
 
-That's it! With just these few API calls, you can access over 20 powerful tools through a simple, consistent interface.
+## Advanced Usage
+
+For more complex scenarios, you can:
+
+1. Fetch all available tools using the `/get-tools` endpoint
+2. Use AI to determine which tool to call based on user input
+3. Chain multiple tool calls together for complex workflows
+
+Check out our [Core Concepts](/core-concept) documentation to learn more about the fundamental elements of the VeyraX platform.
+
+For practical examples and ready-to-use code, visit our [Cookbooks](/python-quick-start) section, which includes:
+- [Python Quick Start](/python-quick-start) - Basic integration examples
+- [AI SDK Quick Start](/aisdk-quick-start) - Using VeyraX with AI frameworks
+- [Call Tools with AI](/call_tools_with_ai) - Integrating VeyraX with OpenAI for intelligent tool selection
+
+---
+
+You're now ready to integrate powerful tools into your applications with VeyraX!

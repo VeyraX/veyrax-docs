@@ -1,33 +1,35 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'VeyraX API Documentation'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+The VeyraX API provides access to a wide range of integration tools and services. This documentation covers the main endpoints for discovering and using these tools.
 
-## Welcome
+## Key Endpoints
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+<CardGroup>
+  <Card
+    title="Get Tools"
+    icon="toolbox"
+    href="/api-reference/endpoint/get-tools"
+  >
+    Available tools and their capabilities
+  </Card>
+  <Card
+    title="Tool Call"
+    icon="bolt"
+    href="/api-reference/endpoint/tool-call"
+  >
+    Execute tool methods with parameters
+  </Card>
+</CardGroup>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints are authenticated using the VeyraX API Key. Include your API key in the header of all requests:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash
+VEYRAX_API_KEY: YOUR_API_KEY
 ```
+
+You can find your API key in your [account settings](https://www.veyrax.com/agent/new).
