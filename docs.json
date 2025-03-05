@@ -28,7 +28,7 @@
               "mcp/introduction",
               "mcp/cursor",
               "mcp/cline",
-              "mcp/windserf",
+              "mcp/windsurf",
               "mcp/claude"
             ]
           },
