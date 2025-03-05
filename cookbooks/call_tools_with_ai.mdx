@@ -9,7 +9,7 @@ To get started with VeyraX — you will need an `API KEY`. You can find it on pl
 
 Before using VeyraX tools, you need to connect the services you want to integrate. Visit the [VeyraX Integrations page](https://www.veyrax.com/integrations) where you can find and connect a wide variety of tools and services. Simply browse through the extensive catalog of available integrations, select the ones you need, and follow the authentication process to connect them to your VeyraX account.
 
-## Step 1: Fetch Available Tools
+## Fetch Available Tools
 
 First, retrieve the list of available tools from the VeyraX integration endpoint:
 
@@ -28,7 +28,7 @@ print("Available Tools:", available_tools)
 
 ---
 
-## Step 2: Define OpenAI Function
+## Define LLM Call
 
 Now, define a function to ask OpenAI to determine which tool, method, and parameters should be called based on the user's query:
 
@@ -61,7 +61,7 @@ def openai_call(question):
 
 ---
 
-## Step 3: Call the Selected Tool
+## Call the Selected Tool
 
 Use the response from OpenAI to call the corresponding VeyraX tool:
 
