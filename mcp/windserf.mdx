@@ -1,0 +1,75 @@
+---
+title: 'Integration with Windsurf'
+description: 'How to connect VeyraX to Windsurf via MCP'
+---
+
+Windsurf is a powerful AI assistant by Codeium that can be enhanced with VeyraX integration to access your tools directly.
+
+## Automatic Installation
+
+### Run Installation Command
+
+Open your terminal and run the following command:
+
+```bash
+npx -y @smithery/cli@latest install @VeyraX/veyrax-mcp --client windsurf
+```
+
+### Add API Key
+
+When prompted, provide the API key that you created in the [VeyraX Platform](https://veyrax.com/agent/new).
+
+## Manual Installation
+
+### Open MCP Configuration
+
+Find the toolbar above the Cascade input:
+
+1. Click the hammer icon
+2. Click "Configure" button
+
+This will open:
+`~/.codeium/windsurf-next/mcp_config.json`
+
+![Windsurf MCP Configuration](/images/windsurf/windsurf_1.png)
+
+### Add MCP Configuration
+
+Add the following configuration to your MCP config file. You'll need to paste the command with your VeyraX API key that you can copy from the [VeyraX Platform](https://www.veyrax.com/agent/new).
+
+The configuration will look like this:
+
+```json
+{
+  "mcpServers": {
+    "@VeyraX-veyrax-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@VeyraX/veyrax-mcp",
+        "--config",
+        "\"{\\\"VEYRAX_API_KEY\\\":\\\"YOUR_VEYRAX_API_KEY\\\"}\""
+      ]
+    }
+  }
+}
+```
+
+<Note>
+MCP is only available in Windsurf Next (Beta). You can download it from the [Windsurf Next download page](https://codeium.com/windsurf/download-next).
+</Note>
+
+
+## Refresh Configuration
+After you add new tools, you need to restart the configuration. You'll see the available tools in the right after.
+
+![Using VeyraX in Windsurf](/images/windsurf/windsurf_3.png)
+
+
+## Start Using VeyraX in Windsurf
+
+Now you can ask questions about any tools you've connected via VeyraX directly in Windsurf.
+
+![Using VeyraX in Windsurf](/images/windsurf/windsurf_2.png)

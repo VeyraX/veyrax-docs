@@ -23,11 +23,21 @@
             ]
           },
           {
+            "group": "Model Context Protocol (MCP)",
+            "pages": [
+              "mcp/introduction",
+              "mcp/cursor",
+              "mcp/cline",
+              "mcp/windserf",
+              "mcp/claude"
+            ]
+          },
+          {
             "group": "Cookbooks",
             "pages": [
-              "call_tools_with_ai",
-              "python-quick-start",
-              "aisdk-quick-start"
+              "cookbooks/call_tools_with_ai",
+              "cookbooks/python-quick-start",
+              "cookbooks/aisdk-quick-start"
             ]
           }
         ]

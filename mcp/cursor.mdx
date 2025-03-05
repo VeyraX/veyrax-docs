@@ -1,0 +1,49 @@
+---
+title: 'Integration with Cursor'
+description: 'How to connect VeyraX to Cursor via MCP'
+---
+
+Cursor is a powerful code editor built for AI-native development, combining the best features of VS Code with advanced AI capabilities.
+
+
+### Open Cursor Settings
+
+Open Cursor and navigate to the settings panel.
+
+![Screen 1](/images/cursor/cursor_1.png)
+
+### Access MCP Section
+
+In the settings panel, locate and click on the **MCP** section.
+
+![Screen 2](/images/cursor/cursor_2.png)
+
+### Add New MCP Server
+
+Click the **Add new MCP Server** button to begin the integration process.
+
+![Screen 3](/images/cursor/cursor_3.png)
+
+### Configure VeyraX Integration
+
+Fill in the following details:
+
+1. **Name**: Enter `VeyraX`
+2. **Type**: Select `Command`
+3. **Command**: Copy the command from our [VeyraX Platform](https://veyrax.com/agent/new) where you can find your API key. The command will look like this:
+
+```bash
+npx -y @smithery/cli@latest run @VeyraX/veyrax-mcp --config "{\"VEYRAX_API_KEY\":\"VEYRAX_API_KEY\"}"
+```
+
+### Save and Refresh
+
+Save your configuration and refresh the integration. You will see new VeyraX tools appear in your Cursor interface.
+
+![Screen 4](/images/cursor/cursor_4.png)
+
+### Start Using VeyraX in Cursor
+
+Now you can ask questions about any tools you've connected via VeyraX directly in Cursor.
+
+![Screen 5](/images/cursor/cursor_5.png)

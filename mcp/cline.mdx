@@ -1,0 +1,71 @@
+---
+title: 'Integration with VS Code'
+description: 'How to connect VeyraX to VS Code (Cline) via MCP'
+---
+
+Cline is a powerful AI assistant in the VS Code environment that can be enhanced with VeyraX integration to access your tools directly.
+
+## Automatic Installation
+
+### Run Installation Command
+
+Open your terminal and run the following command:
+
+```bash
+npx -y @smithery/cli@latest install @VeyraX/veyrax-mcp --client cline
+```
+
+### Add API Key
+
+When prompted, provide the API key that you created in the [VeyraX Platform](https://veyrax.com/agent/new).
+
+## Manual Installation
+
+### Open MCP Server Panel
+
+In the Cline extension, locate and click the MCP Server tab.
+
+![Cline MCP Server Tab](/images/cline/cline_1.png)
+
+### Choose Installed MCP Servers
+
+You'll need to select it from the list of installed MCP servers and set up a new one.
+
+![Using VeyraX in Cline](/images/cline/cline_2.png)
+
+
+### Configure MCP Server
+
+Click the "Configure MCP Servers" button and add the following configuration:
+
+```json
+{
+  "mcpServers": {
+    "@VeyraX-veyrax-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@VeyraX/veyrax-mcp",
+        "--config",
+        "\"{\\\"VEYRAX_API_KEY\\\":\\\"YOUR_VEYRAX_API_KEY\\\"}\""
+      ]
+    }
+  }
+}
+```
+
+### Save the Configuration
+
+Cline will automatically detect the changes and start the MCP server.
+
+<Note>
+MCP server list errors can be safely ignored. Cline's MCP integration is in beta and they're working on improvements.
+</Note>
+
+## Start Using VeyraX in Cline
+
+Now you can ask questions about any tools you've connected via VeyraX directly in Cline.
+
+![Using VeyraX in Cline](/images/cline/cline_4.png)
