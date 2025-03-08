@@ -1,0 +1,50 @@
+---
+title: 'ClickHouse Integration'
+description: 'Connect your ClickHouse database to VeyraX'
+---
+
+ClickHouse is a fast open-source column-oriented database management system that allows for real-time analytics using SQL queries.
+
+## Setting up the connection
+
+### Find the connection settings in ClickHouse
+
+1. Log in to your ClickHouse account and open your project
+2. In the interface, find and click on the **Connect** button as shown below:
+
+![ClickHouse Connect Button Location](/images/clickhouse/clickhouse_1.png)
+
+### Get your connection parameters
+
+In the connection settings screen, you'll find all the necessary parameters for connecting to your ClickHouse database:
+
+![ClickHouse Connection Parameters](/images/clickhouse/clickhouse_2.png)
+
+You'll need the following parameters:
+- **Host**: The database host URL
+- **Port**: Port of database (default is 9440)
+- **Database**: The database name
+- **User**: The database user
+- **Password**: Your database password
+
+If you don't remember your password or need to reset it:
+1. Navigate to your ClickHouse project settings
+2. Find the credentials section
+3. Use the reset password option if needed
+
+### Add the connection in VeyraX
+
+1. In VeyraX, navigate to the [Integrations section](https://www.veyrax.com/integrations)
+2. Select **ClickHouse** integration
+3. Enter the connection details you obtained from ClickHouse:
+   - Host
+   - Port (default: 9440)
+   - Database name
+   - Username
+   - Password
+4. Click **Save Connection** to verify everything works
+5. Save your integration
+
+## Using the ClickHouse integration
+
+Once connected, you can query your ClickHouse database directly from VeyraX, taking advantage of its fast analytical capabilities.

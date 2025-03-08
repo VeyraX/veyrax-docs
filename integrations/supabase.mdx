@@ -1,0 +1,53 @@
+---
+title: 'Supabase Integration'
+description: 'Connect your Supabase PostgreSQL database to VeyraX'
+---
+
+Supabase is built on PostgreSQL, so this integration uses the PostgreSQL connection parameters from your Supabase project.
+
+## Setting up the connection
+
+### Find the connection settings in Supabase
+
+1. Log in to your Supabase account and open your project
+2. In the left sidebar, find and click on the **Connect** button as shown below:
+
+![Supabase Connect Button Location](/images/supabase/supabase_1.png)
+
+### Get your connection parameters
+
+In the connection settings screen, you'll find all the necessary parameters for connecting to your PostgreSQL database:
+
+![Supabase Connect Button Location](/images/supabase/supabase_2.png)
+
+You'll need the following parameters:
+- **Host**: The database host URL
+- **Port**: Port of database
+- **Database**: The database name
+- **User**: The database user
+- **Password**: Your database password
+
+If you don't remember your password or need to reset it:
+
+1. Go to **Project Settings**
+2. Navigate to the **Database** tab
+3. Scroll down to the **Database Password** section
+4. Click on **Reset Database Password** if needed
+
+### Add the connection in VeyraX
+
+1. In VeyraX, navigate to the [Integrations section](https://www.veyrax.com/integrations)
+2. Select **PostgreSQL** integration (Supabase uses PostgreSQL)
+3. Enter the connection details you obtained from Supabase:
+   - Host
+   - Port
+   - Database name
+   - Username
+   - Password
+   - Schema
+4. Click **Save Connection** to verify everything works
+5. Save your integration
+
+## Using the Supabase integration
+
+Once connected, you can query your Supabase database directly from VeyraX.
