@@ -1,0 +1,97 @@
+---
+title: 'HTTP Request Tool'
+description: 'Test your local and remote APIs easily through Cursor using VeyraX HTTP Request tool.'
+---
+
+HTTP Request tool helps you test APIs directly from IDE. Whether you're developing a Node.js or Python application, you can easily test your endpoints during development.
+
+## Testing Local Development APIs
+
+When developing locally, you'll need ngrok to make your local server accessible. Here's how to set it up:
+
+### For Node.js Applications
+
+1. Start your Node.js server (typically runs on port 3000):
+
+```bash
+npm start
+# or
+node server.js
+# Your API is now running on http://localhost:3000
+```
+
+2. Install and run ngrok:
+
+```bash
+# Install ngrok globally
+npm install -g ngrok
+
+# Start ngrok (in a new terminal)
+ngrok http 3000
+```
+
+3. Copy the https URL from ngrok (looks like `https://abc123.ngrok.io`)
+
+4. Now in Cursor, you can test your endpoint by asking the agent:
+
+```bash
+@http_request test my endpoint POST https://abc123.ngrok.io/api/users with this body {"name": "test"}
+```
+
+### For Python Applications
+
+1. Start your Python server (example with Flask on port 5000):
+
+```bash
+# Start your Flask/FastAPI server
+python app.py
+# Your API is now running on http://localhost:5000
+```
+
+2. Install and run ngrok:
+
+```bash
+# Install ngrok (macOS)
+brew install ngrok
+# or download from https://ngrok.com/download
+
+# Start ngrok
+ngrok http 5000
+```
+
+3. Copy the https URL from ngrok
+
+4. Test in IDE:
+
+```bash
+@http_request test my Flask endpoint GET https://abc123.ngrok.io/api/data
+```
+
+## Why ngrok?
+
+- Your local server (`localhost:3000` or `localhost:5000`) isn't accessible from the internet
+- ngrok creates a secure tunnel and gives you a public URL
+- This public URL can be used to test your local API endpoints
+- No need to deploy to test your APIs
+
+## Common Testing Scenarios
+
+Ask the agent to:
+
+```bash
+# Basic GET request
+@http_request test GET https://your-ngrok-url.ngrok.io/api/users
+
+# POST with JSON body
+@http_request test POST https://your-ngrok-url.ngrok.io/api/users with body {"name": "John", "email": "john@example.com"}
+
+# With headers
+@http_request test POST https://your-ngrok-url.ngrok.io/api/protected with header Authorization: Bearer your-token
+
+# With query parameters
+@http_request test GET https://your-ngrok-url.ngrok.io/api/search?query=test
+```
+
+The agent will help you format the request correctly and show you the response.
+
+Remember: Always use the ngrok URL (https://abc123.ngrok.io) instead of localhost when testing through the HTTP Request tool.
