@@ -1,0 +1,268 @@
+---
+title: 'Integration with ChatGPT'
+description: 'How to connect VeyraX to ChatGPT via MCP'
+---
+
+ChatGPT is a powerful AI assistant by OpenAI that can be enhanced with VeyraX integration to access your tools directly.
+
+## Creating a Custom GPT
+
+Go to [ChatGPT](https://chat.openai.com/) and navigate to the **My GPTs** section.
+
+1. Click **Create GPT**.
+    ![Creating GPT](/images/gpt/gpt_1.png)
+
+2. Fill in the following details:
+
+   - **Name**: `VeyraX`
+   - **Description**: `VeyraX is the only tool you need to get access to all your tools.`
+   - **Instructions**: `You have access to user tools via 2 functions: /get-tools and /tool-call. Users can connect 40+ tools on https://www.veyrax.com/integrations.`
+
+    ![Creating GPT](/images/gpt/gpt_2.png)
+
+## Setting up Capabilities and Actions
+
+1. Select the Capabilities & Knowledge you'd like your GPT to have.
+
+2. Create a new action:
+   - Click **Create new action**.
+
+    ![Creating GPT Action](/images/gpt/gpt_3.png)
+
+   - Paste your provided JSON schema into the schema field.
+
+   ```json
+   {
+     "info": {
+       "title": "VeyraX API",
+       "description": "API for retrieving available tools and executing tool methods dynamically.",
+       "version": "1.0.0"
+     },
+     "servers": [
+       {
+         "url": "https://veyraxapp.com",
+         "description": "VeyraX Production Server"
+       }
+     ],
+     "components": {
+       "securitySchemes": {
+         "VeyraxApiKey": {
+           "type": "apiKey",
+           "in": "header",
+           "name": "VEYRAX_API_KEY"
+         }
+       },
+       "schemas": {
+         "ToolListResponse": {
+           "type": "object",
+           "properties": {
+             "tools": {
+               "type": "object",
+               "additionalProperties": {
+                 "type": "object",
+                 "properties": {
+                   "methods": {
+                     "type": "object",
+                     "additionalProperties": {
+                       "type": "object",
+                       "properties": {
+                         "parameters": {
+                           "type": "object",
+                           "additionalProperties": {
+                             "type": "string"
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+           }
+         },
+         "SendEmailRequest": {
+           "type": "object",
+           "properties": {
+             "to": {
+               "type": "string",
+               "example": "recipient@example.com"
+             },
+             "subject": {
+               "type": "string",
+               "example": "Hello from VeyraX"
+             },
+             "body": {
+               "type": "string",
+               "example": "This is a test email sent via the VeyraX API."
+             }
+           },
+           "required": [
+             "to",
+             "subject",
+             "body"
+           ]
+         },
+         "SendEmailResponse": {
+           "type": "object",
+           "properties": {
+             "messageId": {
+               "type": "string",
+               "example": "1234567890"
+             },
+             "threadId": {
+               "type": "string",
+               "example": "0987654321"
+             },
+             "status": {
+               "type": "string",
+               "example": "sent"
+             }
+           }
+         },
+         "DynamicToolMethodRequest": {
+           "type": "object",
+           "description": "Generic request object for tool method execution.",
+           "properties": {
+             "parameters": {
+               "type": "object",
+               "additionalProperties": true,
+               "description": "Dynamic parameters for the tool method."
+             }
+           },
+           "required": [
+             "parameters"
+           ]
+         },
+         "DynamicToolMethodResponse": {
+           "type": "object",
+           "description": "Generic response object for tool method execution.",
+           "properties": {
+             "result": {
+               "type": "object",
+               "additionalProperties": true,
+               "description": "Dynamic result structure based on the tool method."
+             }
+           }
+         }
+       }
+     },
+     "paths": {
+       "/get-tools": {
+         "get": {
+           "operationId": "getTools",
+           "summary": "Retrieve available tools",
+           "description": "Fetches a list of available tools and their supported methods.",
+           "security": [
+             {
+               "VeyraxApiKey": []
+             }
+           ],
+           "responses": {
+             "200": {
+               "description": "Successfully retrieved tools",
+               "content": {
+                 "application/json": {
+                   "schema": {
+                     "$ref": "#/components/schemas/ToolListResponse"
+                   }
+                 }
+               }
+             }
+           }
+         }
+       },
+       "/tool-call/{tool}/{method}?include_component=false": {
+         "post": {
+           "operationId": "callToolMethod",
+           "summary": "Call a tool method dynamically",
+           "description": "Executes a specified method on a given tool.",
+           "security": [
+             {
+               "VeyraxApiKey": []
+             }
+           ],
+           "parameters": [
+             {
+               "name": "tool",
+               "in": "path",
+               "required": true,
+               "description": "The tool to execute (e.g., \"gmail\", \"google-calendar\").",
+               "schema": {
+                 "type": "string"
+               }
+             },
+             {
+               "name": "method",
+               "in": "path",
+               "required": true,
+               "description": "The method to execute within the tool (e.g., \"sendEmail\", \"listEvents\").",
+               "schema": {
+                 "type": "string"
+               }
+             }
+           ],
+           "requestBody": {
+             "required": true,
+             "content": {
+               "application/json": {
+                 "schema": {
+                   "$ref": "#/components/schemas/DynamicToolMethodRequest"
+                 }
+               }
+             }
+           },
+           "responses": {
+             "200": {
+               "description": "Successful tool method execution",
+               "content": {
+                 "application/json": {
+                   "schema": {
+                     "$ref": "#/components/schemas/DynamicToolMethodResponse"
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+   ```
+
+3. Configure authentication:
+   - Go to the **Authentication** section.
+   - Select **API Key** as the authentication type.
+   - Choose **Custom**.
+   - Enter the following API key name: `VEYRAX_API_KEY`
+   - Paste your personal VeyraX API key, which you can create on the [VeyraX Platform](https://veyrax.com/agent/new).
+   - Click **Save**.
+
+    ![Creating GPT Action](/images/gpt/gpt_5.png)
+
+4. Two actions will now appear:
+   - `get-tools`
+   - `tool-call`
+
+## Testing the Integration
+
+Click **Test**. If the test passes, ChatGPT now has access to your VeyraX tools.
+
+![Testing Integration](/images/gpt/gpt_7.png)
+
+After testing you should be able to see all tools that you've connected on VeyraX. 
+
+![Testing Integration](/images/gpt/gpt_6.png)
+
+## Final Steps
+
+1. Click **Create**.
+![Testing Integration](/images/gpt/gpt_8.png)
+2. Ensure you select **Create only for me** to avoid accidentally sharing your API key.
+![Testing Integration](/images/gpt/gpt_9.png)
+3. Your GPT is now successfully connected to VeyraX.
+
+## Start Using VeyraX in ChatGPT
+
+Now you can ask questions about any tools you've connected via VeyraX directly in ChatGPT.
+
+![Using VeyraX features](/images/gpt/gpt_10.png)

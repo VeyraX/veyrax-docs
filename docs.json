@@ -24,13 +24,14 @@
             ]
           },
           {
-            "group": "Model Context Protocol (MCP)",
+            "group": "MCP & Plugins",
             "pages": [
               "mcp/introduction",
               "mcp/cursor",
               "mcp/cline",
               "mcp/windsurf",
-              "mcp/claude"
+              "mcp/claude",
+              "mcp/chat-gpt"
             ]
           },
           {
