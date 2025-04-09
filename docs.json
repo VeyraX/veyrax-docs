@@ -30,8 +30,7 @@
               "mcp/cursor",
               "mcp/cline",
               "mcp/windsurf",
-              "mcp/claude",
-              "mcp/chatgpt"
+              "mcp/claude"
             ]
           },
           {
