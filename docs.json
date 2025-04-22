@@ -34,6 +34,16 @@
             ]
           },
           {
+            "group": "MCP Deployment",
+            "pages": [
+              "deployment/introduction",
+              "deployment/deploy",
+              "deployment/connect",
+              "deployment/usage",
+              "deployment/veyrax_mcp_helper"
+            ]
+          },
+          {
             "group": "Cookbooks",
             "pages": [
               "cookbooks/call_tools_with_ai",

@@ -1,0 +1,73 @@
+---
+title: 'Deploy'
+description: 'Step-by-step guide to deploy your MCP tools with VeyraX'
+---
+
+# Deploying Your MCP Tools
+
+Deploying MCP-compatible tools should be simple and straightforward. With VeyraX, we've streamlined the entire process to make deployment as painless as possible. Our platform handles all the complex infrastructure setup, containerization, and scaling, allowing you to focus on what matters - building amazing tools.
+
+In this guide, we'll walk through the complete process of taking your GitHub repository and turning it into a live, accessible MCP tool that can be used across all supported platforms and integrated with your existing workflows.
+
+## Step-by-Step Deployment Flow
+
+### 1. Access the VeyraX Deployment UI
+Go to the [deployment section](https://www.veyrax.com/deployment/create) of the VeyraX platform.
+
+![Deploy Interface](/images/deployment/deploy_1.png)
+
+### 2. Insert a GitHub Repository URL
+- You can choose any public repository with MCP.
+- Make sure the repository includes a Dockerfile. Any working Dockerfile is acceptable.
+- Currently, only public repositories are supported.
+
+### 3. Fetch Data
+- You can either paste your GitHub URL directly or search from our extensive list of existing repositories.
+- Click Fetch to start repository inspection.
+
+![Environment Variables](/images/deployment/deploy_2.png)
+
+### 4. Set Environment Variables
+- After fetching, VeyraX auto-detects required environment variables for your project.
+- Fill in the required values directly in the UI.
+
+### 5. Click Deploy
+- Once your environment is configured, the Deploy button becomes active.
+- Click it to initiate deployment. This takes about 2 minutes.
+
+### 6. Monitor Deployment Status
+- Go to the Development tab to observe the deployment progress.
+- Possible statuses: building, ready, failed.
+
+![Deployment Status](/images/deployment/deploy_3.png)
+
+### 7. Access Your MCP Instance
+- After the deployment completes, the Overview tab will show a link to your running instance.
+- This instance is now live and callable via all VeyraX-supported methods.
+
+![Installation Information](/images/deployment/deploy_4.png)
+
+## MCP Access
+
+Your deployed instance is MCP-compatible and immediately usable in:
+- Cursor IDE
+- Claude
+- Windserf
+- VS Code (via CLI integration)
+- via any other MCP-compatiable client
+
+You can also integrate it with your existing VeyraX agents and workflows.
+
+## Additional Notes
+
+**Rollbacks**: If you need to revert to a previous version, simply redeploy the same repository, by default we take last commit.
+
+## Summary
+
+Deploying tools with VeyraX is fast, simple, and powerful:
+- Paste any valid GitHub URL with a Dockerfile;
+- Let us auto-detect your env vars;
+- Deploy and connect in minutes;
+- Access the tool in your preferred MCP environment instantly.
+
+Whether you're testing a new agent, extending your tool stack, or deploying production-ready endpoints — VeyraX makes MCP deployment effortless.

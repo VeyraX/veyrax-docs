@@ -1,0 +1,78 @@
+---
+title: 'Usage'
+description: 'Learn how to use your deployed MCP tools'
+---
+
+# Using Your MCP Tools
+
+After deploying and connecting your MCP tools, you have multiple ways to access and use them. This guide covers the different methods of interacting with your tools.
+
+## Option 1: Universal Access via VeyraX API
+
+All connected MCP tools are automatically available through the VeyraX API ecosystem. The VeyraX API provides a consistent interface for accessing all your tools through standard endpoints:
+
+- **GET /get-tools**: Retrieve a list of all available tools including your MCP tools
+- **POST /tool-call**: Execute specific tool methods with parameters
+
+This method requires no additional setup beyond the initial connection and works automatically with all tools in your VeyraX account.
+
+## Option 2: Specific Tool Access via CLI
+
+For targeted integration of specific MCP tools in your preferred environment, use the CLI installation command.
+
+```bash
+npx @veyrax/mcp-cli install <tool-id> <api-key> --client <client-name>
+```
+
+![CLI Installation](/images/deployment/deploy_4.png)
+
+Implementation steps:
+1. Get your unique installation command from the deployment dashboard
+2. Run the command in your terminal
+3. The tool is automatically configured in your specified MCP client
+4. Access it directly through that client's interface
+
+This adds just the specific tool to your chosen MCP client (Cursor, Claude, VS Code, etc.) without requiring the entire VeyraX ecosystem.
+
+## Option 3: Direct SSE Integration
+
+When you deploy an MCP tool with VeyraX, a unique SSE (Server-Sent Events) link is created for your tool. This link can be used with any MCP-compatible client:
+
+1. Find your unique SSE link in the deployment dashboard
+2. Open the JSON configuration, copy it
+3. Add it to any MCP-compatible environment
+4. Add it to your preferred MCP-compatible client:
+   - Cursor
+   - Claude
+   - VS Code
+   - Custom implementations with ISDK, Agent SDK
+   - Any other MCP client
+
+![SSE Integration](/images/deployment/connect_4.png)
+
+This method enables direct integration without dependency on the VeyraX API infrastructure.
+
+## Option 4: Direct API Access
+
+Each deployed MCP tool also exposes its own API endpoints that you can access directly:
+
+1. View available methods on the API tab of your tool
+2. Call the tool using the provided endpoints directly:
+   - Make HTTP requests to the tool's API URL
+   - Pass required parameters as specified in the documentation
+   - Authenticate using your API key
+
+![API Access](/images/deployment/connect_2.png)
+
+This approach provides maximum flexibility for custom integrations and independent usage patterns.
+
+## Choosing the Right Method
+
+Each access method serves different technical needs:
+
+- **Universal VeyraX API Access**: Consolidated interface for all tools
+- **Specific Tool Access via CLI**: Targeted integration for specific MCP clients
+- **Direct SSE Integration**: Client-specific MCP implementation
+- **Direct API Access**: Maximum control for custom integrations
+
+You can use different methods for different scenarios based on your technical requirements.

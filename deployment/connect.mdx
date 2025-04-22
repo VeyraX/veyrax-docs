@@ -1,0 +1,41 @@
+---
+title: 'Connect'
+description: 'Learn how to connect and use your MCP tools'
+---
+
+# Connecting Your MCP Tools
+
+VeyraX provides flexible options for connecting MCP tools, whether you've just deployed your own or want to use existing ones from our marketplace. This guide explains how to connect and access these tools.
+
+## Connection Methods
+
+### 1. Connect Your Recently Deployed Tool
+
+When you deploy an MCP tool using VeyraX, it's automatically connected to your account. You can immediately access it through:
+
+- The VeyraX API (using `/get-tools` and `/tool-call` endpoints)
+- The VeyraX CLI for specific client integration
+
+Use the unique installation command provided in your deployment dashboard:
+
+```bash
+npx @veyrax/mcp-cli install <process-id> <your-api-key> --client <client-name>
+```
+
+![MCP CLI Example](/images/deployment/deploy_4.png)
+
+**Important**: This installation link is unique and works exclusively with your API key. Be careful when sharing this command as it contains your personal credentials.
+
+### 2. Connect Marketplace MCP Tools
+
+You can also connect existing MCP tools from our marketplace:
+
+1. Go to the [VeyraX marketplace](https://www.veyrax.com/integrations?tab=mcps)
+2. Browse and select any MCP tool
+3. Click the "Connect" button
+4. Enter any required credentials
+5. Receive your unique installation link
+
+![MCP Marketplace](/images/deployment/connect_1.png)
+
+Simply connect the deployed tool or choose from the available options via the [VeyraX Integration Marketplace](https://www.veyrax.com/integrations?tab=mcps).
