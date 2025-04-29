@@ -9,6 +9,44 @@ Deploying MCP-compatible tools should be simple and straightforward. With VeyraX
 
 In this guide, we'll walk through the complete process of taking your GitHub repository and turning it into a live, accessible MCP tool that can be used across all supported platforms and integrated with your existing workflows.
 
+## Deployment Methods
+
+VeyraX supports three methods for deploying your MCP tools, listed in order of reliability:
+
+### 1. veyrax.yaml Configuration (Recommended)
+
+The most reliable method is to include a `veyrax.yaml` file in your repository's root. This configuration file gives VeyraX precise instructions on how to build and run your tool.
+
+Example `veyrax.yaml`:
+
+```yaml
+name: VeyraX
+description: "Single MCP tool to connect 100+ tools: Gmail, Calendar and more."
+base_image: node:22.14.0-alpine
+project_directory: /app
+install_command: npm install
+build_command: npm run build
+start_command: node dist/index.js
+env:
+  VEYRAX_API_KEY: config.VEYRAX_API_KEY
+```
+
+#### Generate Your veyrax.yaml
+
+VeyraX offers an online [YAML Generator tool](https://www.veyrax.com/deployment/generate-yaml) that can create a veyrax.yaml file based on your repository structure. Simply input your repository URL, and the tool will analyze your project and generate an appropriate configuration file that you can download and add to your repository.
+
+### 2. Dockerfile
+
+If your repository has a Dockerfile in the root directory, VeyraX will automatically detect and use it for deployment. This is a good option if you already have Docker set up for your project.
+
+We won't attempt to modify or generate a Dockerfile - we'll use exactly what you've provided in your repository.
+
+### 3. AI-Generated Configuration (Not Recommended)
+
+If neither a `veyrax.yaml` nor a Dockerfile is found, VeyraX will analyze your project structure and attempt to create a deployment configuration automatically.
+
+While this can work for simple projects, it's not recommended for production deployments as it may not correctly capture all requirements.
+
 ## Step-by-Step Deployment Flow
 
 ### 1. Access the VeyraX Deployment UI
