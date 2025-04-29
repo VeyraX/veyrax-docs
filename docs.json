@@ -39,8 +39,7 @@
               "deployment/introduction",
               "deployment/deploy",
               "deployment/connect",
-              "deployment/usage",
-              "deployment/veyrax_mcp_helper"
+              "deployment/usage"
             ]
           },
           {
